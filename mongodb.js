@@ -15,12 +15,32 @@ MongoClient.connect(connectionURL, {userNewUrlParser: true}, (err, client) => {
 
     const db = client.db(databaseName);
 
-    db.collection('users').findOne({ _id: new ObjectID("5de44b5bf3a7e3a03d3ba762")}, (err, user) => {
+   /*  db.collection('users').findOne({ _id: new ObjectID("5de44b5bf3a7e3a03d3ba762")}, (err, user) => {
         if(err){
             return console.log("unable get user")
         }
 
         console.log(user);
+    }) */
+
+    /* db.collection('users').find({ age: 16 }).toArray((err, users) => {
+        console.log(users)
+    }) */
+
+    db.collection('tasks').findOne({des: "do shopping"}, (err, task) => {
+        if(err){
+            return console.log(err);
+        }
+        
+        console.log(task);
+    })
+
+    db.collection('tasks').find({completed: false}).toArray((err, tasks) => {
+        if(err){
+            return console.log(err)
+        }
+        
+        console.log(tasks)
     })
 });
 

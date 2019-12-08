@@ -33,9 +33,9 @@ const User = mongoose.model('User', {
     password: {
         type: String,
         validate(value){
-            console.log("DId it print before∂")
+          
             if(value.length < 7){
-                console.log("did this print")
+             
                 throw new Error("Password must be longer than 7 characters.")
             }
             if(validator.contains(value,"password")){

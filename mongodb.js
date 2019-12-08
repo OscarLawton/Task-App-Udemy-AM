@@ -1,20 +1,20 @@
 // CRUD create read update delete
 
 
-const {MongoClient, ObjectID } = require('mongodb');
+/* const {MongoClient, ObjectID } = require('mongodb');
 const connectionURL = 'mongodb://127.0.0.1:27017'; // "Localhost causes bubs and problems"
 const databaseName = 'task-manger';
-
+ */
 /* const id = new ObjectID()
 console.log(id)
 console.log(id.getTimestamp()) */
-MongoClient.connect(connectionURL, {userNewUrlParser: true}, (err, client) => {
+/* MongoClient.connect(connectionURL, {userNewUrlParser: true}, (err, client) => {
    if(err){
        return console.log('Unable to connect to database!')
-   } 
+   }  
 
     const db = client.db(databaseName);
-
+*/
     /*db.collection('users').deleteMany({
         age: 22
     }).then((result) => {
@@ -22,13 +22,13 @@ MongoClient.connect(connectionURL, {userNewUrlParser: true}, (err, client) => {
     }).catch((error) => {
         console.log(error)
     })*/
-    db.collection('tasks').deleteOne({
+   /*  db.collection('tasks').deleteOne({
         des: "do shopping"
     }).then((result) => {
         console.log(result)
     }).catch((err) => {
         console.log(err)
-    })
+    }) */
     //db.collection('users').insert({name: "shitty", age: 22})
     /* const updatePromise = db.collection('tasks').updateMany({
         completed: false

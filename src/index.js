@@ -19,16 +19,16 @@ app.listen(port, () => {
     console.log("Server is up on port " + port)
 })
 
-const jwt = require('jsonwebtoken')
+/* const jwt = require('jsonwebtoken')
 const myFunction = async () =>{
-    const token = jwt.sign({ _id: "abc123"}, 'thisismynewcourse', {expiresIn: '0 seconds'})
+    const token = jwt.sign({ _id: "abc123"}, 'thisismynewcourse', {expiresIn: ' seconds'})
     console.log(token)
 
     const data = jwt.verify(token, 'thisismynewcourse')
     console.log(data)
 }
 
-myFunction()
+myFunction() */
 /* const bcrypt = require('bcrypt')
 const myFunction = async () => {
     const password = 'Read12345!'

@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(userRouter);
 app.use(taskRouter);
 
+
 app.get("/", (req, res)=>{
     res.send("hey")
 });
@@ -18,6 +19,16 @@ app.listen(port, () => {
     console.log("Server is up on port " + port)
 })
 
+const jwt = require('jsonwebtoken')
+const myFunction = async () =>{
+    const token = jwt.sign({ _id: "abc123"}, 'thisismynewcourse', {expiresIn: '0 seconds'})
+    console.log(token)
+
+    const data = jwt.verify(token, 'thisismynewcourse')
+    console.log(data)
+}
+
+myFunction()
 /* const bcrypt = require('bcrypt')
 const myFunction = async () => {
     const password = 'Read12345!'

@@ -63,6 +63,8 @@ router.post('/users/login', async (req, res) => {
         res.status(400).send()
     }
 })
+
+
 router.patch('/users/:id', async (req, res)=> {
     const updates = Object.keys(req.body);
     const allowedUpdates = ['name', 'email', 'password', 'age'];

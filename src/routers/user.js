@@ -1,12 +1,16 @@
 const express = require('express');
 const User = require('../models/user')
+const auth = require('../middleware/auth')
 const router = new express.Router();
 const app = express()
 app.use(router)
 
-router.get('/users', async (req, res) =>{
+router.get('/users', auth, async (req, res) =>{
     try{
         const users = await User.find({})
+        console.log("@@@@@@@@@@@@@@@@@@@")
+        console.log(users);
+        console.log("@@@@@@@@@@@@@@@@@@@")
         res.send(users)
     } catch(e){
         res.status(500).send()

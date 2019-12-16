@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000
 
 /* app.use((req, res) => {
-    //res.status(503).send("site maintence")
+    res.status(503).send("site maintence")
 }) */
 
 app.use(express.json());
@@ -23,16 +23,16 @@ app.listen(port, () => {
     console.log("Server is up on port " + port)
 })
 
-/* const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 const myFunction = async () =>{
-    const token = jwt.sign({ _id: "abc123"}, 'thisismynewcourse', {expiresIn: ' seconds'})
+    const token = jwt.sign({ _id: "abc123"}, 'thisismynewcourse', {expiresIn: '7 days'})
     console.log(token)
 
     const data = jwt.verify(token, 'thisismynewcourse')
     console.log(data)
 }
 
-myFunction() */
+myFunction() 
 /* const bcrypt = require('bcrypt')
 const myFunction = async () => {
     const password = 'Read12345!'

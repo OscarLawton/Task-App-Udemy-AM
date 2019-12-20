@@ -49,3 +49,15 @@ myFunction() */
 
 // toJSON() explaination
 
+const Task = require('./models/task')
+const User = require('./models/user')
+const main = async () => {
+   /*  const task = await Task.findById('5dfc1e90bedadf25b303aada');
+    await task.populate('owner').execPopulate()
+    console.log(task) */
+    const user = await User.findById('5dfc1d5027df9124cc830b95')
+    await user.populate('tasks').execPopulate()
+    console.log(user.tasks)
+}
+
+main()

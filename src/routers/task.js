@@ -6,14 +6,26 @@ const app = express()
 app.use(router)
 
 
-
+// GET /tasks?complete=false
 router.get('/tasks', auth, async (req, res) => {
+    const match = {}
+
+    if(req.query.completed){
+        match.completed = req.query.completed === 'true'
+    }
     try{
-        const tasks = await Task.find({owner: req.user._id })
+        // New way (populate)
+        await req.user.populate({
+            path: 'tasks',
+            match
+        }).execPopulate()
+        res.send(req.user.tasks)
+        // Old way
+        /* const tasks = await Task.find({owner: req.user._id })
         if(!tasks){
             return res.status(500).send()
         }
-        res.send(tasks)
+        res.send(tasks) */
     } catch(e){
         res.status(500).send()
     }

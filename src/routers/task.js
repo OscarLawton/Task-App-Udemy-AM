@@ -7,6 +7,7 @@ app.use(router)
 
 
 // GET /tasks?complete=false
+// GET /tasks?limit=10&skip=0
 router.get('/tasks', auth, async (req, res) => {
     const match = {}
 
@@ -17,7 +18,11 @@ router.get('/tasks', auth, async (req, res) => {
         // New way (populate)
         await req.user.populate({
             path: 'tasks',
-            match
+            match,
+            options: {
+                limit: parseInt(req.query.limit),
+                skip: parseInt(req.query.skip)
+            }
         }).execPopulate()
         res.send(req.user.tasks)
         // Old way

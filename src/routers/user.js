@@ -1,9 +1,15 @@
 const express = require('express');
 const User = require('../models/user')
 const auth = require('../middleware/auth')
+const multer = require('multer')
 const router = new express.Router();
 const app = express()
 app.use(router)
+
+
+const upload = multer({
+    dest: 'images'
+})
 
 router.get('/users/me', auth, async (req, res) =>{
     console.log(req.user)
@@ -99,6 +105,18 @@ router.post('/users/logout-all', auth, async (req, res) => {
         res.status(500).send()
     }
 });
+
+router.post('/users/me/avatar', upload.single('avatar'), async (req, res) =>{
+    try{
+        res.send()
+    } catch(e){
+        console.log("*************")
+        console.log("upload error")
+        console.log(e)
+        console.log("*************")
+    }
+    
+})
 
 router.patch('/users/me', auth, async (req, res)=> {
     const updates = Object.keys(req.body);

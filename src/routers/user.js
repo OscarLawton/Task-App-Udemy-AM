@@ -6,9 +6,20 @@ const router = new express.Router();
 const app = express()
 app.use(router)
 
-
 const upload = multer({
-    dest: 'images'
+
+    limits: {
+        fileSize: 1000000
+    },
+    fileFilter(req, file, cb){
+        if(!file.originalname.match(/\.(jpg|jpeg|png)$/)){
+            return cb(new Error('Please upload a files of type jpg, jpeg or png'))
+        }
+        cb(undefined, true)
+       /*  cb(new Error('File must be a PDF'))
+        cb(undefined, true)
+        cb(undefined, false) */
+    }
 })
 
 router.get('/users/me', auth, async (req, res) =>{
@@ -51,6 +62,7 @@ router.post('/users', async (req, res) =>{
     try{
         await user.save()
         const token = await user.generateAuthToken()
+        console.log(token)
         res.status(201).send({user, token})
     } catch(e){
         res.status(400).send(e);
@@ -106,16 +118,12 @@ router.post('/users/logout-all', auth, async (req, res) => {
     }
 });
 
-router.post('/users/me/avatar', upload.single('avatar'), async (req, res) =>{
-    try{
-        res.send()
-    } catch(e){
-        console.log("*************")
-        console.log("upload error")
-        console.log(e)
-        console.log("*************")
-    }
-    
+router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) =>{
+    req.user.avatar = req.file.buffer;
+    await req.user.save();
+    res.send();
+}, (error, req, res, next) => {
+    res.status(400).send({error: error.message})
 })
 
 router.patch('/users/me', auth, async (req, res)=> {
